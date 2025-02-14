@@ -6,6 +6,7 @@ void swap(int* a, int* b)
     int c = *a;
     *a = *b;
     *b = c;
+    // using std::swap(a, b) would be the easier way
 }
 
 void reverse(int* v, unsigned int len)
@@ -32,13 +33,15 @@ int main()
     constexpr auto arraySize = 100;
     int* v = nullptr;
     // create and reverse the vector of LEN numbers
-    reverse(v, 1000);
     v = createAndFillVector(arraySize);
+    reverse(v, arraySize);
 
     // check if the revert worked:
     const bool isReversed = std::is_sorted(v, v + arraySize, std::greater {});
     std::cout << "Vector reversed successfully: " << std::boolalpha
               << isReversed << "\n";
+
+    delete[] v;
 
     return isReversed ? 0 : 1;
 }
